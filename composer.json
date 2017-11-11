@@ -1,6 +1,6 @@
 {
     "name": "kerigansolutions/facebook-photo-gallery",
-    "description": "Bring aFacebook albums and photos into WordPress",
+    "description": "Bring Facebook albums and photos into WordPress",
     "type": "library",
     "require": {
         "guzzlehttp/guzzle": "^6.3"
