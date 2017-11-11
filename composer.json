@@ -12,5 +12,10 @@
             "email": "daron.adkins@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "KeriganSolutions\\FacebookPhotoGallery\\" : "src/"
+        }
+    },
     "minimum-stability": "stable"
 }
