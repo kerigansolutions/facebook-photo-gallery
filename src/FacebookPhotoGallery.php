@@ -9,17 +9,17 @@ class FacebookPhotoGallery
     {
         $accessToken = FACEBOOK_ACCESS_TOKEN;
         $pageId      = FACEBOOK_PAGE_ID;
-        $fields      = 'albums{name,link,created_time,cover_photo{images.limit(1)}}';
+        $fields      = 'name,link,created_time,cover_photo{picture,images.limit(1)}';
 
-        $client = new Client(['base_uri' => '"https://graph.facebook.com/v2.11/']);
+        $client = new Client(['base_uri' => 'https://graph.facebook.com/v2.11/']);
 
         $response = $client->request(
             'GET',
-            $pageId.'?fields='.$fields
+            $pageId.'/albums?fields='.$fields.'&access_token='.$accessToken
         );
 
         $results = json_decode($response->getBody());
 
-        return $results;
+        return $results->data;
     }
 }
