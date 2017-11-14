@@ -5,6 +5,9 @@ use GuzzleHttp\Client;
 
 class FacebookPhotoGallery
 {
+    protected $client;
+    protected $pageId;
+    protected $accessToken;
 
     public function __construct()
     {
@@ -14,16 +17,16 @@ class FacebookPhotoGallery
     }
     public function albums($limit = null, $before = null, $after = null)
     {
-        $fields = 'name,link,created_time,cover_photo{picture,images.limit(1)}';
+        $fields = 'id,name,link,created_time,cover_photo{picture,images.limit(1)}';
 
         $response = $this->client->request(
             'GET',
             $this->pageId .
             '/albums?fields=' . $fields .
-            '&access_token=' . $this->accessToken .
             '&before=' . $before .
             '&after=' . $after .
-            '&limit=' . $limit
+            '&limit=' . $limit .
+            '&access_token=' . $this->accessToken
         );
 
         $results = json_decode($response->getBody());
@@ -33,16 +36,16 @@ class FacebookPhotoGallery
 
     public function albumPhotos($albumId, $limit = null, $before = null, $after = null)
     {
-        $fields = 'photo_count,photos{images,name}';
+        $fields = 'images,name';
 
         $response = $this->client->request(
             'GET',
             $albumId .
             '/photos?fields=' . $fields .
-            '&accessToken=' . $this->accessToken .
             '&before=' . $before .
             '&after=' . $after .
-            '&limit=' . $limit
+            '&limit=' . $limit .
+            '&access_token=' . $this->accessToken
         );
 
         $results = json_decode($response->getBody());
